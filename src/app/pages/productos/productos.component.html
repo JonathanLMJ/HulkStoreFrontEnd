@@ -1,0 +1,158 @@
+<div class=" content">
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">LISTADO DE PRODUCTOS</h4>
+          <button title="Agregar producto" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearModal" aria-expanded="false">
+            <i class="tim-icons icon-simple-add"></i>
+          </button>
+        </div>
+        <div class=" card-body">
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="tableProductos">
+              <thead class=" text-primary">
+                <tr>
+                  <th class=" text-center">Nombre</th>
+                  <th class=" text-center">Descripción</th>
+                  <th class=" text-center">Valor</th>
+                  <th class=" text-center">Tipo</th>
+                  <th class=" text-center">Modificar</th>
+                  <th class=" text-center">Eliminar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let producto of responseProductos">
+                  <td>{{producto.nombreProducto}}</td>
+                  <td>{{producto.descripcionProducto}}</td>
+                  <td class=" text-center">{{producto.valorProducto}}</td>
+                  <td class=" text-center">{{producto.tipoProducto | nombreTipo}}</td>
+                  <td class=" text-center">
+                    <button title="Modificar producto" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificarModal" (click)="cargarDatosFila(producto)">
+                      <i class="tim-icons icon-pencil"></i>
+                    </button>
+                  </td>
+                  <td class=" text-center">
+                    <button title="Eliminar producto" type="button" class="btn btn-primary" (click)="eliminarProducto(producto.idProducto)">
+                    <i class="tim-icons icon-trash-simple"></i></button>
+                  </td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">CREAR PRODUCTO</h5>
+    </div>
+    <div class="modal-body">
+      <div class=" row">
+        <div class=" col-md-6">
+          <label for="nombre-producto">Nombre producto</label>
+        </div>
+        <div class=" col-md-6" class="form-group">
+          <input type="text" class="form-control" id="nombreProducto" name="nombreProducto" [(ngModel)]="nombreProducto">
+        </div>
+      </div>
+      <div class=" row">
+        <div class=" col-md-6">
+          <label for="descripcion-producto">Descripción producto</label>
+        </div>
+        <div class=" col-md-6" class="form-group">
+          <input type="text" class="form-control" id="descripcionProducto" name="descripcionProducto" [(ngModel)]="descripcionProducto">
+        </div>
+      </div>
+      <div class=" row">
+        <div class=" col-md-6">
+          <label for="valor-producto">Valor producto</label>
+        </div>
+        <div class=" col-md-6" class="form-group">
+          <input type="number" min="0" step="1000" class="form-control" id="valorProducto" name="valorProducto" [(ngModel)]="valorProducto">
+        </div>
+      </div>
+      <div class=" row">
+        <div class=" col-md-6">
+          <label for="tipoProducto">Tipo</label>
+        </div>
+        <div class=" col-md-6" class="form-group">
+          <select class="form-control" id="tipoProducto" name="tipoProducto" [(ngModel)]="tipoProducto">
+            <option selected [ngValue]="null">Seleccione un tipo de producto</option>
+            <option *ngFor="let tipo of responseTiposProducto" [value]="tipo.idTipoProducto">
+              {{tipo.nombreTipoProducto}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer" >
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="limpiarModal()">Cancelar</button>
+      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="crearProducto()">Guardar cambios</button>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modificarModal" tabindex="-1" aria-labelledby="modificarModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">MODIFICAR PRODUCTO</h5>
+      </div>
+      <div class="modal-body">
+        <div class=" row">
+          <div class=" col-md-6">
+            <label for="nombre-producto">Nombre producto</label>
+          </div>
+          <div class=" col-md-6" class="form-group">
+            <input type="text" class="form-control" id="nombreProducto" name="nombreProducto"
+              [(ngModel)]="nombreProducto">
+          </div>
+        </div>
+        <div class=" row">
+          <div class=" col-md-6">
+            <label for="descripcion-producto">Descripción producto</label>
+          </div>
+          <div class=" col-md-6" class="form-group">
+            <input type="text" class="form-control" id="descripcionProducto" name="descripcionProducto"
+              [(ngModel)]="descripcionProducto">
+          </div>
+        </div>
+        <div class=" row">
+          <div class=" col-md-6">
+            <label for="valor-producto">Valor producto</label>
+          </div>
+          <div class=" col-md-6" class="form-group">
+            <input type="number" min="0" step="1000" class="form-control" id="valorProducto" name="valorProducto"
+              [(ngModel)]="valorProducto">
+          </div>
+        </div>
+        <div class=" row">
+          <div class=" col-md-6">
+            <label for="tipoProducto">Tipo</label>
+          </div>
+          <div class=" col-md-6" class="form-group">
+            <select class="form-control" id="tipoProducto" name="tipoProducto" [(ngModel)]="tipoProducto">
+              <option selected [ngValue]="null">Seleccione un tipo de producto</option>
+              <option *ngFor="let tipo of responseTiposProducto" [value]="tipo.idTipoProducto">
+                {{tipo.nombreTipoProducto}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="limpiarModal()">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="modificarProducto()">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>

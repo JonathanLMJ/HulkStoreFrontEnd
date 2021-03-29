@@ -1,0 +1,11 @@
+.modal-open .modal {
+    background-color: rgb(255 255 255 / 43%) !important;
+}
+
+.form-control {
+    color: rgb(0 0 0 / 88%) !important;
+}
+
+div#createModal {
+    background-color: rgb(255 255 255 / 46%) !important;
+}

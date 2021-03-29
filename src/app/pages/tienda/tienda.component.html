@@ -1,0 +1,29 @@
+
+<div class=" content">
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h5 class=" title">PRODUCTOS</h5>
+          <p class=" category">
+            No te quedes sin el tuyo
+          </p>
+        </div>
+        <div class=" card-body all-icons">
+          <div class=" row">
+            <div *ngFor="let producto of responseProductos" class=" font-icon-list col-lg-3 col-md-4 col-sm-4 col-xs-6 col-xs-6">
+              <div class=" font-icon-detail">
+                <h6>{{producto.nombreProducto}}</h6>
+                <img src="../../../assets/img/shirt.jpg" alt="camisetas de super héroes">
+                <p>{{producto.descripcionProducto}}</p>
+                <p>{{producto.valorProducto}} COP</p>
+                <button type="button" class="btn btn-secondary" title="Agregar al carrito"><i class="tim-icons icon-cart"></i></button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
